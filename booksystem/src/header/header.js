@@ -1,6 +1,8 @@
 import React from 'react';
 import './header.css';
 
+
+
 function Header() {
   return (
     <header className="header">
@@ -8,20 +10,19 @@ function Header() {
         <h1 className="site-title">書籍管理システム</h1>
       </div>
 
-      <div className="header-center">
+      {/* <div className="header-center">
         <input
           type="text"
           placeholder="書名 または 著者名で検索"
           className="search-input"
         />
         <button className="search-button">検索</button>
-      </div>
+      </div> */}
       
 
       <div className="header-right">
         <a href="/books" className="nav-link">一覧表示</a>
         <a href="/register" className="nav-link">登録</a>
-        <a href="/search" className="nav-link">検索</a>
       </div>
     </header>
   );

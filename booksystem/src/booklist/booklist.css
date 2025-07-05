@@ -1,0 +1,67 @@
+.book-list {
+  padding: 20px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+/* テキスト入力欄 */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters input {
+  padding: 6px 8px;
+  width: 180px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* 範囲入力（年・ページ数） */
+.range-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.range-group label {
+  font-weight: bold;
+  margin-right: 5px;
+  width: 80px;
+}
+
+.range-group input {
+  padding: 6px 8px;
+  width: 160px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* テーブル */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fafafa;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: #e0e0e0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sort-symbol {
+  margin-left: 5px;
+  font-size: 13px;
+}

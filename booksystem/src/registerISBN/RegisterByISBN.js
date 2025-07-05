@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import './registerByISBN.css';
 
 function RegisterByISBN() {
-  /* --- タブ状態 --- */
-  const [mode, setMode] = useState('isbn'); // 'isbn' | 'manual'
-
-  /* --- ISBN一括登録 --- */
+  const [mode, setMode] = useState('isbn');
   const [isbns, setIsbns] = useState(Array(10).fill(''));
+  const [manual, setManual] = useState({
+    title: '', author: '', publisher: '', shelf: '', year: '', pages: '', isbn: '', added: ''
+  });
+  const [message, setMessage] = useState('');
 
   const handleISBNChange = (index, value) => {
     const updated = [...isbns];
@@ -14,17 +15,37 @@ function RegisterByISBN() {
     setIsbns(updated);
   };
 
-  const submitISBNs = (e) => {
+  const submitISBNs = async (e) => {
     e.preventDefault();
     const toRegister = isbns.filter(v => v.trim() !== '');
-    console.log('登録するISBN:', toRegister);
-    // TODO: サーバー送信やバリデーション
-  };
+    if (toRegister.length === 0) {
+      alert("1件以上のISBNを入力してください。");
+      return;
+    }
 
-  /* --- 手動登録 --- */
-  const [manual, setManual] = useState({
-    title: '', author: '', publisher: '', shelf: '', year: '', pages: '', isbn: '', added: ''
-  });
+    try {
+      const res = await fetch('/index.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ isbns: toRegister })
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        setMessage('登録処理が完了しました。');
+        console.log('登録結果:', result.results);
+        // 必要なら登録結果ごとに画面表示
+      } else {
+        setMessage(`エラー: ${result.message || '登録に失敗しました。'}`);
+      }
+    } catch (error) {
+      console.error("通信エラー:", error);
+      setMessage("通信エラーが発生しました。");
+    }
+  };
 
   const handleManualChange = ({ target: { name, value } }) =>
     setManual(prev => ({ ...prev, [name]: value }));
@@ -32,10 +53,9 @@ function RegisterByISBN() {
   const submitManual = (e) => {
     e.preventDefault();
     console.log('手動登録データ:', manual);
-    // TODO: サーバー送信やバリデーション
+    // TODO: 後ほど index.php に送信する処理を追加
   };
 
-  /* --- JSX --- */
   return (
     <div className="isbn-register">
       {/* タブ */}
@@ -49,6 +69,9 @@ function RegisterByISBN() {
           onClick={() => setMode('manual')}
         >手動で登録</button>
       </div>
+
+      {/* メッセージ表示 */}
+      {message && <div className="message">{message}</div>}
 
       {/* ISBN一括登録フォーム */}
       {mode === 'isbn' && (
@@ -71,7 +94,7 @@ function RegisterByISBN() {
         </>
       )}
 
-      {/* 手動登録フォーム */}
+      {/* 手動登録フォーム（未接続） */}
       {mode === 'manual' && (
         <>
           <h2>✍️ 手動登録フォーム</h2>

@@ -1,84 +1,16 @@
-/* ===== ベース ===== */
-.isbn-register {
-  max-width: 500px;
+/* ===== ベースレイアウト ===== */
+.book-list {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* ===== タブ ===== */
-.tab-container {
-  display: flex;
-  border-bottom: 2px solid #ccc;
-  margin-bottom: 20px;
-}
-
-.tab {
-  flex: 1;
-  padding: 10px 0;
-  background: #f5f5f5;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.tab + .tab {
-  border-left: 1px solid #ccc;
-}
-
-.tab:hover {
-  background: #e8e8e8;
-}
-
-.tab.active {
-  background: #4CAF50;
-  color: #fff;
-  border-bottom: 2px solid #4CAF50;
-}
-
-/* ===== フォーム ===== */
-.isbn-input-row {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-}
-
-.isbn-input-row label {
-  font-weight: bold;
-  margin-bottom: 4px;
-}
-
-.isbn-input-row input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button[type='submit'] {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  background: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button[type='submit']:hover {
-  background: #45a049;
-}
-
-.book-list {
-  padding: 20px;
-}
-
 h2 {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
-/* テキスト入力欄 */
+/* ===== フィルタ入力 ===== */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -87,13 +19,15 @@ h2 {
 }
 
 .filters input {
-  padding: 6px 8px;
-  width: 180px;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  flex: 1;
+  min-width: 150px;
+  box-sizing: border-box;
 }
 
-/* 範囲入力（年・ページ数） */
+/* ===== 範囲入力グループ ===== */
 .range-group {
   display: flex;
   align-items: center;
@@ -103,37 +37,96 @@ h2 {
 
 .range-group label {
   font-weight: bold;
-  margin-right: 5px;
   width: 80px;
+  display: inline-block;
 }
 
 .range-group input {
   padding: 6px 8px;
-  width: 160px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  width: 160px;
+  box-sizing: border-box;
 }
 
-/* テーブル */
-table {
+/* ===== テーブル周り ===== */
+.table-container {
+  position: relative;
+  margin-top: 40px; /* 十分なスペースを確保 */
+}
+
+.table-controls {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  z-index: 10; /* ボタンが他の要素の下に潜らないように */
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;        /* パディングを小さく */
+  font-size: 12px;          /* フォントサイズを小さく */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+/* ===== テーブル本体 ===== */
+.book-table {
   width: 100%;
   border-collapse: collapse;
-  background: #fafafa;
+  background: #f9f9f9;
 }
 
-th, td {
+.book-table th,
+.book-table td {
   padding: 10px;
   border: 1px solid #ddd;
   text-align: left;
+  vertical-align: middle;
 }
 
-th {
-  background: #e0e0e0;
+.book-table th {
+  background-color: #e0e0e0;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .sort-symbol {
   margin-left: 5px;
-  font-size: 13px;
+  font-size: 12px;
+}
+
+/* 編集モード時のinput */
+.book-table input {
+  width: 100%;
+  padding: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

@@ -1,7 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './header.css';
-
-
 
 function Header() {
   return (
@@ -10,19 +9,9 @@ function Header() {
         <h1 className="site-title">書籍管理システム</h1>
       </div>
 
-      {/* <div className="header-center">
-        <input
-          type="text"
-          placeholder="書名 または 著者名で検索"
-          className="search-input"
-        />
-        <button className="search-button">検索</button>
-      </div> */}
-      
-
       <div className="header-right">
-        <a href="/books" className="nav-link">一覧表示</a>
-        <a href="/register" className="nav-link">登録</a>
+        <Link to="/books" className="nav-link">一覧表示</Link>
+        <Link to="/register" className="nav-link">登録</Link>
       </div>
     </header>
   );

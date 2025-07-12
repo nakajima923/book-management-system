@@ -59,7 +59,7 @@ function BookList() {
         }
       })
       .catch(err => {
-        console.error('更新エラー:', err);
+        console.error('更新エラーが発生しました:', err);
         alert('エラーが発生しました');
       });
   };
